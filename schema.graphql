@@ -1,0 +1,78 @@
+# This entity store information about the Masterchef contract itself.
+type MasterChef @entity {
+  # MasterChef contract address.
+  id: ID!
+  
+  # Version of Masterchef contract.
+  version: BigInt
+
+  # 
+  #pancake: Token!
+
+  # All pools included inside masterchef contract.
+  pools: [FarmPool!] @derivedFrom(field: "MasterChef")
+  poolCount: BigInt!
+
+  # Timeseries data.
+  timestamp: BigInt!
+  block: BigInt!
+}
+
+type FarmPool @entity {
+  # Pool id of
+  id: ID!
+
+  # Current Masterchef entity implemented for this pool.
+  MasterChef: MasterChef!
+
+  # Contract address of paired tokens.
+  pair: Bytes!
+
+  # ?
+  lpBalance: BigInt
+
+  # Total user deposited and withdrawn.
+  totalUserCount: BigInt
+  
+  # Total Value Locked inside pool.
+  tvl: BigInt
+
+  # Users staked.
+  users: [User!]! @derivedFrom(field: "pool")
+
+  # Timeseries data
+  timestamp: BigInt!
+  block: BigInt!
+}
+
+type User @entity {
+  # Formatted id as "poolID-userAddress"
+  id: ID!
+
+  # User's public address.
+  address: Bytes!
+
+  # Farming pool that attched, based on id field above.
+  pool: FarmPool
+
+  # Amount of LPToken that user's currently staking in the pool.
+  amount: BigInt!
+
+  # Amount of reward user claimed
+  # Thus, this amount is no longer available to claim.
+  rewardDebt: BigInt!
+
+  # Pending cake reward for user.
+  pendingCakeReward: BigInt!
+
+  # Additional field.
+  # Might be useful in the future
+  boostMultiplier: BigInt
+
+  # Time series data
+  timestamp: BigInt!
+  block: BigInt!
+}
+
+
+
