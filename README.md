@@ -23,6 +23,8 @@ None
 
 ### Installing
 
+Updating...
+
 Nothing to install yet. Just check the project's GraphQL API here: Updating...
 
 Example GraphQL API: https://api.thegraph.com/subgraphs/name/pancakeswap/masterchef-v2
@@ -81,5 +83,4 @@ queryPool()
 
 ## Acknowledgments
 
-Inspiration, code snippets, etc.
 Updating....
